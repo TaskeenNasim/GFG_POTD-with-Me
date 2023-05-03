@@ -1,0 +1,33 @@
+class Solution{
+public:
+    bool makePalindrome(int n,vector<string> &arr){
+        // Code here
+        unordered_map<string,int> mp;
+	for(int i=0; i<n; i++){
+		string x = arr[i];
+		mp[x]++;
+		reverse(x.begin(), x.end());
+		mp[x]++;
+	}
+
+	int ct=0;
+	for(auto it : mp){
+		if(is_pal(it.first)){
+			if((it.second/2)%2==1){ct++;}
+		}
+		else if(it.second%2==1){return false;}
+	}
+    
+    if(ct==0){return true;}
+	else if(n%2==1 && ct==1){return true;}
+	return false;
+    }
+     bool is_pal(string x){
+	int a=0, b=x.size()-1;
+	while(a<b){
+		if(x[a]==x[b]){a++; b--;}
+		else{return false;}
+	}
+	return true;
+    }
+};
